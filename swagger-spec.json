@@ -1,0 +1,835 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Log in with email and password",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Get a new access token using the refresh token cookie",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Log out and invalidate the refresh token",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "operationId": "AuthController_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get the currently authenticated user",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/public/services": {
+      "get": {
+        "operationId": "PublicServicesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get all active services for the public website",
+        "tags": [
+          "Public - Services"
+        ]
+      }
+    },
+    "/api/admin/services": {
+      "get": {
+        "operationId": "AdminServicesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all services (including inactive)",
+        "tags": [
+          "Admin - Services"
+        ]
+      },
+      "post": {
+        "operationId": "AdminServicesController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new service",
+        "tags": [
+          "Admin - Services"
+        ]
+      }
+    },
+    "/api/admin/services/{id}": {
+      "put": {
+        "operationId": "AdminServicesController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a service",
+        "tags": [
+          "Admin - Services"
+        ]
+      },
+      "delete": {
+        "operationId": "AdminServicesController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a service",
+        "tags": [
+          "Admin - Services"
+        ]
+      }
+    },
+    "/api/public/homepage": {
+      "get": {
+        "operationId": "PublicHomepageController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get all active homepage content sections",
+        "tags": [
+          "Public - Homepage"
+        ]
+      }
+    },
+    "/api/admin/homepage": {
+      "get": {
+        "operationId": "AdminHomepageController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all homepage sections (including inactive)",
+        "tags": [
+          "Admin - Homepage"
+        ]
+      },
+      "put": {
+        "operationId": "AdminHomepageController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/HomepageSectionDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create/update homepage sections (hero, banners, text blocks)",
+        "tags": [
+          "Admin - Homepage"
+        ]
+      }
+    },
+    "/api/public/products": {
+      "get": {
+        "operationId": "PublicProductsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get all active products",
+        "tags": [
+          "Public - Products"
+        ]
+      }
+    },
+    "/api/public/products/{id}": {
+      "get": {
+        "operationId": "PublicProductsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get a single active product by id",
+        "tags": [
+          "Public - Products"
+        ]
+      }
+    },
+    "/api/admin/products": {
+      "get": {
+        "operationId": "AdminProductsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all products (including inactive)",
+        "tags": [
+          "Admin - Products"
+        ]
+      },
+      "post": {
+        "operationId": "AdminProductsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new product",
+        "tags": [
+          "Admin - Products"
+        ]
+      }
+    },
+    "/api/admin/products/{id}": {
+      "get": {
+        "operationId": "AdminProductsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a single product by id",
+        "tags": [
+          "Admin - Products"
+        ]
+      },
+      "put": {
+        "operationId": "AdminProductsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a product",
+        "tags": [
+          "Admin - Products"
+        ]
+      },
+      "delete": {
+        "operationId": "AdminProductsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a product",
+        "tags": [
+          "Admin - Products"
+        ]
+      }
+    },
+    "/api/admin/products/{id}/images": {
+      "post": {
+        "operationId": "AdminProductsController_addImage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddProductImageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add an image to a product",
+        "tags": [
+          "Admin - Products"
+        ]
+      }
+    },
+    "/api/admin/products/{id}/images/{imageId}": {
+      "delete": {
+        "operationId": "AdminProductsController_removeImage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "imageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove an image from a product",
+        "tags": [
+          "Admin - Products"
+        ]
+      }
+    },
+    "/api/admin/products/{id}/images/reorder": {
+      "put": {
+        "operationId": "AdminProductsController_reorderImages",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReorderImagesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reorder a product's images",
+        "tags": [
+          "Admin - Products"
+        ]
+      }
+    },
+    "/api/admin/upload": {
+      "post": {
+        "operationId": "UploadController_uploadFile",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Upload an image file",
+        "tags": [
+          "Admin - Upload"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Pixel38 CMS API",
+    "description": "REST API for the wood products/services CMS — public website + admin dashboard",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "admin@pixel38.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Admin123"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "CreateServiceDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Custom Furniture"
+          },
+          "description": {
+            "type": "string",
+            "example": "We craft bespoke wooden furniture to your specifications."
+          },
+          "icon": {
+            "type": "string",
+            "example": "hammer-icon"
+          },
+          "imageUrl": {
+            "type": "string",
+            "example": "https://example.com/service.jpg"
+          },
+          "order": {
+            "type": "number",
+            "example": 0
+          }
+        },
+        "required": [
+          "title",
+          "description"
+        ]
+      },
+      "UpdateServiceDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Custom Furniture"
+          },
+          "description": {
+            "type": "string",
+            "example": "Updated description"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "HomepageSectionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "a1b2c3d4-...",
+            "description": "Omit to create a new section"
+          },
+          "section": {
+            "type": "string",
+            "example": "hero"
+          },
+          "title": {
+            "type": "string",
+            "example": "Quality Wood, Crafted with Care"
+          },
+          "subtitle": {
+            "type": "string",
+            "example": "Serving builders and homeowners since 1998"
+          },
+          "description": {
+            "type": "string",
+            "example": "Full description text here..."
+          },
+          "content": {
+            "type": "object",
+            "example": {
+              "ctaText": "Shop Now",
+              "ctaLink": "/products"
+            }
+          },
+          "imageUrl": {
+            "type": "string",
+            "example": "https://example.com/hero.jpg"
+          },
+          "order": {
+            "type": "number",
+            "example": 0
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "CreateProductDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Oak Hardwood"
+          },
+          "description": {
+            "type": "string",
+            "example": "Premium oak hardwood, ideal for flooring and furniture."
+          },
+          "category": {
+            "type": "string",
+            "example": "Hardwood"
+          },
+          "price": {
+            "type": "number",
+            "example": 45.99
+          },
+          "traits": {
+            "example": [
+              {
+                "label": "Durability",
+                "positive": true
+              },
+              {
+                "label": "Expensive",
+                "positive": false
+              }
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "category"
+        ]
+      },
+      "UpdateProductDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Oak Hardwood"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "traits": {
+            "example": [
+              {
+                "label": "Durability",
+                "positive": true
+              },
+              {
+                "label": "Expensive",
+                "positive": false
+              }
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AddProductImageDto": {
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "type": "string",
+            "example": "/uploads/1234567-891234.jpg"
+          },
+          "order": {
+            "type": "number",
+            "example": 0
+          }
+        },
+        "required": [
+          "imageUrl"
+        ]
+      },
+      "ReorderImagesDto": {
+        "type": "object",
+        "properties": {
+          "imageIds": {
+            "example": [
+              "image-id-1",
+              "image-id-2",
+              "image-id-3"
+            ],
+            "description": "Array of image IDs in the desired new order",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "imageIds"
+        ]
+      }
+    }
+  }
+}
