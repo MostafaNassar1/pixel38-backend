@@ -35,7 +35,7 @@ async function bootstrap() {
   .setTitle('Pixel38 CMS API')
   .setDescription('REST API for the wood products/services CMS — public website + admin dashboard')
   .setVersion('1.0')
-  .addBearerAuth() // enables the "Authorize" button for JWT access tokens
+  .addBearerAuth() 
   .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);

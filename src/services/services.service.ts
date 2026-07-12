@@ -6,7 +6,6 @@ import { CreateServiceDto, UpdateServiceDto } from './service.dto';
 export class ServicesService {
   constructor(private prisma: PrismaService) {}
 
-  // Public: only active services, ordered
   async findAllPublic() {
     return this.prisma.service.findMany({
       where: { isActive: true },

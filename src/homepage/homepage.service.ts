@@ -23,7 +23,7 @@ export class HomepageService {
     const results = await Promise.all(
       sections.map((section) => {
         if (section.id) {
-          // Existing section — update it
+          
           const { id, ...data } = section;
           return this.prisma.homepageContent.update({
             where: { id },
