@@ -3,6 +3,7 @@
 REST API for a Content Management System powering a wood products/services website — built with **NestJS**, **PostgreSQL**, and **Prisma ORM**, as part of the Pixel38 Full Stack Developer Technical Assessment.
 
 - **Frontend repository:** https://github.com/MostafaNassar1/pixel38-frontend
+- - **Frontend repository:**: https://github.com/MostafaNassar1/pixel38-backend
 - **Deployed frontend:** https://pixel38-frontend-o3tecj1rs-mostafanassar1s-projects.vercel.app/
 - **Backend deployment:** Not deployed — see [Deployment Status](#deployment-status) below for details and instructions to run locally.
 
