@@ -86,8 +86,8 @@ Create a `.env` file in the project root with the following:
 ```env
 DATABASE_URL="postgresql://postgres:postegres123@localhost:5432/pixel38_cms?schema=public"
 
-JWT_ACCESS_SECRET="a-long-random-secret-string"
-JWT_REFRESH_SECRET="a-different-long-random-secret-string"
+JWT_ACCESS_SECRET="access-secret-123"
+JWT_REFRESH_SECRET="refresh-secret-123"
 JWT_ACCESS_EXPIRES="15m"
 JWT_REFRESH_EXPIRES="7d"
 
