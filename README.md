@@ -5,7 +5,7 @@ REST API for a Content Management System powering a wood products/services websi
 - **Frontend repository:** https://github.com/MostafaNassar1/pixel38-frontend
 - **Backend repository:**: https://github.com/MostafaNassar1/pixel38-backend
 - **Deployed frontend:** https://pixel38-frontend-o3tecj1rs-mostafanassar1s-projects.vercel.app/
-- **Backend deployment:** Not deployed — see [Deployment Status](#deployment-status) below for details and instructions to run locally.
+- **Backend deployment:** Not deployed — below details and instructions to run locally.
 
 ## Admin Login Credentials
 
