@@ -156,7 +156,8 @@ The database itself **is** live on [Neon](https://neon.tech) with all migrations
 
 ## 6. AI Tools Used
 
-Claude AI was used as an assistant throughout this project.
+- Claude
+- Copilot
 
 ## 7. Time Spent
 
