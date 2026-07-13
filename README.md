@@ -1,98 +1,162 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Pixel38 CMS — Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+REST API for a Content Management System powering a wood products/services website — built with **NestJS**, **PostgreSQL**, and **Prisma ORM**, as part of the Pixel38 Full Stack Developer Technical Assessment.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- **Frontend repository:** https://github.com/MostafaNassar1/pixel38-frontend
+- **Deployed frontend:** https://pixel38-frontend-o3tecj1rs-mostafanassar1s-projects.vercel.app/
+- **Backend deployment:** Not deployed — see [Deployment Status](#deployment-status) below for details and instructions to run locally.
 
-## Description
+## Admin Login Credentials
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```
+Email:    admin@pixel38.com
+Password: Admin123
 ```
 
-## Compile and run the project
+---
+
+## Tech Stack
+
+- **Framework:** NestJS (REST API)
+- **Database:** PostgreSQL
+- **ORM:** Prisma
+- **Auth:** JWT (access + refresh tokens), bcrypt password hashing, httpOnly cookies
+- **Docs:** Swagger 
+- **File uploads:** Multer (local disk storage, served as static files)
+
+---
+
+## 1. Setup Instructions
+
+### Prerequisites
+- Node.js v18+
+- PostgreSQL installed and running locally (or a hosted Postgres instance, e.g. [Neon](https://neon.tech))
+
+### Install and run
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/MostafaNassar1/pixel38-backend.git
+cd pixel38-backend
+npm install
 ```
 
-## Run tests
+Create your `.env` file (see [Environment Variables](#2-environment-variables) below).
+
+Run database migrations:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npx prisma migrate dev
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Seed the admin user:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npx prisma db seed
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Start the dev server:
 
-## Resources
+```bash
+npm run start:dev
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+The API will be running at `http://localhost:3000`, prefixed with `/api` (e.g. `http://localhost:3000/api/public/products`).
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### API Documentation (Swagger)
 
-## Support
+Once the server is running, interactive API docs — every endpoint, request/response schemas, and example payloads — are available at:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+http://localhost:3000/api/docs
+```
 
-## Stay in touch
+To test protected (admin) endpoints directly from Swagger: log in via `POST /api/auth/login` in the docs UI, copy the returned `accessToken`, click the **Authorize** button (top right), and paste the token in.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Full API reference with request/response examples: [API.md](./API.md)
 
-## License
+Postman collection: https://mostafa-nassar829-6663953.postman.co/workspace/Mostafa-Nassar's-Workspace~f3fe9e71-70f9-446c-87af-e74515d88729/folder/53043788-ff616ad1-2f36-47af-aea2-1a52fcdba760?action=share&source=copy-link&creator=53043788
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## 2. Environment Variables
+
+Create a `.env` file in the project root with the following:
+
+```env
+DATABASE_URL="postgresql://postgres:postegres123@localhost:5432/pixel38_cms?schema=public"
+
+JWT_ACCESS_SECRET="a-long-random-secret-string"
+JWT_REFRESH_SECRET="a-different-long-random-secret-string"
+JWT_ACCESS_EXPIRES="15m"
+JWT_REFRESH_EXPIRES="7d"
+
+```
+
+## 3. Database Setup
+
+1. Install PostgreSQL and create a database:
+   ```sql
+   CREATE DATABASE pixel38_cms;
+   ```
+2. Set `DATABASE_URL` in `.env` to point at it.
+3. Run migrations to create all tables:
+   ```bash
+   npx prisma migrate dev
+   ```
+4. Seed the initial admin user:
+   ```bash
+   npx prisma db seed
+   ```
+   This creates `admin@pixel38.com` / `Admin123` (editable in `prisma/seed.ts` before running).
+
+### Schema overview
+
+| Table | Purpose |
+|---|---|
+| `users` | Admin accounts. Stores bcrypt-hashed passwords and a bcrypt-hashed refresh token for session invalidation on logout. |
+| `homepage_content` | Flexible CMS blocks (hero, banner, text sections) for the homepage, distinguished by a `section` field. Includes a `content: Json` field for freeform structured data. |
+| `services` | Company services shown on the public site. |
+| `products` | Wood types/products, including a `traits: Json` field for the pros/cons checklist (e.g. Durability ✓, Expensive ✗) shown per wood type. |
+| `product_images` | Multiple images per product, with an `order` field for drag-and-drop reordering, cascade-deleted with their parent product. |
+
+Prisma migration history lives in `prisma/migrations/` and is included in this repository.
+
+---
+
+## 4. Architecture Overview
+
+```
+src/
+├── auth/          # Login, JWT strategies (access + refresh), guards, bcrypt logic
+├── homepage/       # Public + admin controllers for homepage content sections
+├── services/        # Public + admin controllers for services CRUD
+├── products/         # Public + admin controllers for products CRUD + image sub-resources
+├── upload/            # Multer-based file upload endpoint
+├── prisma.service.ts   # Shared, injectable Prisma client (single connection pool)
+├── app.module.ts
+└── main.ts              # Global prefix, CORS, validation pipe, Swagger, static file serving
+```
+
+**Architectural Overview:**
+
+Public and admin routes are deliberately separated per resource (e.g. `PublicServicesController` / `AdminServicesController` sharing one underlying service), keeping route-level security explicit without duplicating business logic. Authentication uses two separate JWT secrets and Passport strategies — short-lived access tokens (15 min) sent via the `Authorization` header, and long-lived refresh tokens (7 days) stored only in an httpOnly cookie so they're never exposed to frontend JavaScript; refresh tokens are also bcrypt-hashed before being stored, so logout can invalidate a session server-side rather than merely client-side. Homepage content uses a single flexible table with a `content: Json` field rather than one table per section, letting `PUT /api/admin/homepage` upsert an arbitrary array of sections (hero, banners, text blocks) in one request — matching how a real CMS "Save" action works. A global `ValidationPipe` (whitelist, forbid-unknown-properties, auto-transform) validates every request against `class-validator`-decorated DTOs, which also drive the Swagger documentation automatically.
+
+---
+
+## 5. Deployment Status
+
+The frontend is deployed and live on Vercel (link above). **The backend is not currently deployed**.
+
+**As a result:** the deployed frontend's dynamic pages (which call the live API) will not function correctly, since there is no reachable backend URL. The admin dashboard and dynamic content require running the backend locally per the setup instructions above, with the frontend's `NEXT_PUBLIC_API_URL` pointed at `http://localhost:3000/api`.
+
+The database itself **is** live on [Neon](https://neon.tech) with all migrations applied and the admin user seeded.
+
+---
+
+## 6. AI Tools Used
+
+Claude AI was used as an assistant throughout this project.
+
+## 7. Time Spent
+
+Approximately **1–2 days**, covering: backend setup and full CRUD + auth implementation and testing (Postman + Swagger), frontend scaffolding and Figma-based UI implementation (desktop + mobile), admin dashboard (auth flow, Services/Products/Homepage management with image upload), and deployment (frontend successful, backend attempted).
